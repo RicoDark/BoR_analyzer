@@ -43,7 +43,7 @@ if __name__ == '__main__':
         Players_ID.append (player_lineup[I])
     players_stats = BoR_Players_Info (Players_ID)
     home_lineup = Lineup (player_lineup, players_stats)
-    home_lineup.Display_Info()
+    #home_lineup.Display_Info()
     
 
     print
@@ -55,10 +55,7 @@ if __name__ == '__main__':
         Players_ID.append (player_lineup[I])
     players_stats = BoR_Players_Info (Players_ID)
     guest_lineup = Lineup (player_lineup, players_stats)
-    guest_lineup.Display_Info()
+    #guest_lineup.Display_Info()
 
-        #stats = [infos[x] for x in relevant]
-        #stats_unicode = [x.encode('ascii', 'ignore') if type(x) == unicode else str(x) for x in stats]
-        #players[Pid] = stats_unicode
-        #print ';'.join(stats_unicode)
+    home_lineup.Compare (guest_lineup)
         
