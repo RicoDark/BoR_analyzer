@@ -26,12 +26,12 @@ def BoR_Players_By_Team (ID_Team, Nat=0, U20=0):
                    )
     return BoR_Request (params)
 
-def BoR_Players_By_Fixture (Fixture_ID):
+def BoR_Report_By_Fixture (Fixture_ID):
     params = dict (d = User.Dev_ID,
                    m = User.Member_ID,
                    mk = User.Member_Key,
                    dk = User.Dev_Key,
-                   r = "fs",
+                   r = "rs",
                    fixtureid = Fixture_ID,
                    json = '1'
                    )
@@ -60,3 +60,40 @@ def BoR_Fixture_Info (Fixture_ID):
                    json = '1'
                    )
     return BoR_Request (params)
+
+def BoR_Team_Lineup (Team_ID, Fixture_ID):
+    params = dict (d = User.Dev_ID,
+                   m = User.Member_ID,
+                   mk = User.Member_Key,
+                   dk = User.Dev_Key,
+                   r = "lu",
+                   teamid = Team_ID,
+                   fixtureid = Fixture_ID,
+                   json = '1'
+                   )
+    return BoR_Request (params)
+
+def BoR_Player_Info (Player_ID):
+    params = dict (d = User.Dev_ID,
+                   m = User.Member_ID,
+                   mk = User.Member_Key,
+                   dk = User.Dev_Key,
+                   r = "p",
+                   playerid = Player_ID,
+                   json = '1'
+                   )
+    return BoR_Request (params)['players'][str (Player_ID)]
+    
+def BoR_Players_Info (Players):
+    player_ids = ""
+    for player in Players:
+        player_ids = player_ids + "," + str (player)
+    params = dict (d = User.Dev_ID,
+                   m = User.Member_ID,
+                   mk = User.Member_Key,
+                   dk = User.Dev_Key,
+                   r = "p",
+                   playerids = player_ids[1:len (player_ids)],
+                   json = '1'
+                   )
+    return BoR_Request (params)['players']
