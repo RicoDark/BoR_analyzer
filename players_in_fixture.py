@@ -12,14 +12,9 @@ relevant = ['name', 'csr', 'age', 'weight', 'height', 'form', 'energy',
             'handling', 'attack', 'defense', 'technique', 'strength', 'jumping',
             'speed', 'agility', 'kicking', 'pops']
 
-#print ';'.join(relevant)
-players = {}
+#players = {}
 
-if __name__ == '__main__':
-    if len (sys.argv) != 2:
-        print "You have to give the fixture ID"
-        exit (1)
-    fixture_id = sys.argv [1]
+def Analyze_Fixture (fixture_id):
     data = BoR_Fixture_Info (fixture_id)
     BoR_time = BoR_Time (data['brt'])
     fixture = data['fixtures'][fixture_id]
@@ -35,7 +30,8 @@ if __name__ == '__main__':
     else:
         print "Fixture to be played ..."
 
-    print "Home -> " + home_team_id + " - " + BoR_Team_Name (home_team_id)
+    Home_Team_Name = BoR_Team_Name (home_team_id)
+    #print "Home -> " + home_team_id + " - " + Home_Team_Name
     lineup_home = BoR_Team_Lineup (home_team_id, fixture_id)
     player_lineup = lineup_home['lineups'][0]
     Players_ID = []
@@ -45,9 +41,8 @@ if __name__ == '__main__':
     home_lineup = Lineup (player_lineup, players_stats)
     #home_lineup.Display_Info()
     
-
-    print
-    print "Guest -> " + guest_team_id + " - " + BoR_Team_Name (guest_team_id)
+    Guest_Team_Name = BoR_Team_Name (guest_team_id)
+    #print "Guest -> " + guest_team_id + " - " + Guest_Team_Name
     lineup_guest = BoR_Team_Lineup (guest_team_id, fixture_id)
     player_lineup = lineup_guest['lineups'][0]
     Players_ID = []
@@ -57,5 +52,15 @@ if __name__ == '__main__':
     guest_lineup = Lineup (player_lineup, players_stats)
     #guest_lineup.Display_Info()
 
+    print
+    print " "*(22 - len (Home_Team_Name)) + Home_Team_Name + " - " + Guest_Team_Name
     home_lineup.Compare (guest_lineup)
-        
+
+
+
+if __name__ == '__main__':
+    if len (sys.argv) != 2:
+        print "You have to give the fixture ID"
+        exit (1)
+    fixture_id = sys.argv [1]
+    Analyze_Fixture (fixture_id)
